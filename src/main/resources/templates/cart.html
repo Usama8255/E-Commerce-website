@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>RevShop Cart</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<style>
+		body {
+			background-color: #f8f9fa;
+		}
+
+		.cart-header {
+			margin: 20px 0;
+		}
+
+		.cart-item {
+			padding: 15px;
+			background-color: white;
+			border: 1px solid #dee2e6;
+			border-radius: 5px;
+			margin-bottom: 15px;
+		}
+
+		.product-image img {
+			max-width: 100px;
+			height: auto;
+		}
+
+		.remove-item {
+			color: red;
+			cursor: pointer;
+		}
+
+		.checkout-button {
+			margin-top: 20px;
+		}
+
+		.nav-link {
+			position: relative;
+			display: inline-block;
+			text-decoration: none;
+			color: blue;
+			font-weight: normal;
+		}
+
+		.nav-link::after {
+			content: '';
+			position: absolute;
+			width: 0;
+			height: 2.5px;
+			display: block;
+			margin-top: 5px;
+			right: 0;
+			background: #ff0000;
+			transition: width 0.3s ease;
+			-webkit-transition: width 0.3s ease;
+		}
+
+		.nav-link:hover::after {
+			width: 45%;
+			left: 0;
+			right: auto;
+		}
+
+		.nav-link.active::after {
+			width: 100%;
+			left: 0;
+			right: auto;
+		}
+
+		.nav-link.active {
+			color: #561ad7;
+			font-weight: bold;
+		}
+
+		.nav-link {
+			color: rgb(0, 0, 0) !important;
+			font-size: 17px;
+			font-weight: bold;
+			padding-top: 0.25rem;
+			padding-bottom: 0.25rem;
+		}
+
+		.navbar {
+			padding-top: 0.5rem;
+			padding-bottom: 0.5rem;
+		}
+
+		.navbar {
+			padding-top: 0.3rem;
+			padding-bottom: 0.3rem;
+			background-color: #a39595;
+		}
+
+		/* Adjust the logo size */
+		.navbar-brand img {
+			width: 160px;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Header / Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+		<a class="navbar-brand" th:href="@{/}"> <img src="https://i.postimg.cc/T2nXh20S/REVSHOP-main2.png"
+				alt="RevShop Logo">
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+			<ul class="navbar-nav ml-auto">
+
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/displayProducts">Shop</a></li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/orderitems">Your Orders</a></li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/favorite">Wishlist</a></li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/home">LogOut</a></li>
+				<li class="nav-item mx-5">
+					<a class="nav-link" href="/revshop/update">
+						<img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/profile-1829212-1551474.png?f=webp&w=512"
+							alt="Profile" style="width: 22px; height: 22px;">
+					</a>
+				</li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/cart"><svg
+							xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+							class="bi bi-bag" viewBox="0 0 16 16">
+							<path
+								d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+						</svg></a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container">
+		<h2 class="cart-header text-center">Your Cart</h2>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- Cart Item 1 -->
+				<div th:each="cart: ${cart}">
+					<div class="cart-item d-flex flex-column flex-md-row justify-content-between align-items-start">
+						<div class="product-info">
+							<h5>
+								<b th:text="${cart.product.name}"></b>
+							</h5>
+							<p class="mb-1">
+								Price: ₹<span class="product-price" th:text="${cart.product.discountPrice}"></span>
+							</p>
+							<p class="mb-1">
+								Quantity: <input type="number" th:value="${cart.quantity}" min="0" style="width: 60px;"
+									class="form-control quantity-input"
+									th:attr="data-price=${cart.product.discountPrice}" onchange="updateTotalPrice()">
+							</p>
+							<form th:action="@{/revshop/cart/remove}" method="post">
+								<input type="hidden" th:name="cartId" th:value="${cart.id}" />
+								<button type="submit" class="remove-item btn btn-link"
+									style="color: red;">Remove</button>
+							</form>
+
+						</div>
+						<div class="product-image mt-3 mt-md-0">
+							<img th:src="@{${cart.product.image_url}}" alt="Product Image">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cart-footer d-flex flex-column align-items-end">
+			<h4>
+				Total: ₹<span id="totalPrice" th:text="${totalPrice}">3892.69</span>
+			</h4>
+			
+			
+			 <form th:action="@{/revshop/checkout}" method="get">
+        <input type="hidden" name="totalPrice" th:value="${totalPrice}" />
+        
+        
+        <div th:each="cart: ${cart}">
+            <input type="hidden" name="cartItems[__${cartStat.index}__].productId" th:value="${cart.product.id}" />
+            <input type="hidden" name="cartItems[__${cartStat.index}__].quantity" th:value="${cart.quantity}" />
+        </div>
+
+        <button type="submit" class="btn btn-primary checkout-button">
+            Checkout
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-sign-turn-right-fill" viewBox="0 0 16 16" style="margin-left: 10px;">
+                <path d="M9.05.435c-.58-.58-1.52-.58-2.1 0L.436 6.95c-.58.58-.58 1.519 0 2.098l6.516 6.516c.58.58 1.519.58 2.098 0l6.516-6.516c.58-.58.58-1.519 0-2.098zM9 8.466V7H7.5A1.5 1.5 0 0 0 6 8.5V11H5V8.5A2.5 2.5 0 0 1 7.5 6H9V4.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L9.41 8.658A.25.25 0 0 1 9 8.466" />
+            </svg>
+        </button>
+    </form>
+		</div>
+	</div>
+	<script>
+		function updateTotalPrice() {
+			let total = 0;
+
+			// Iterate over each quantity input
+			document.querySelectorAll('.quantity-input').forEach(input => {
+				const price = parseFloat(input.getAttribute('data-price'));
+				const quantity = parseInt(input.value);
+				total += price * quantity;
+			});
+
+			// Update the total price
+			document.getElementById('totalPrice').innerText = total.toFixed(2);
+		}
+
+		function redirectToCheckout() {
+			// Implement the redirection to the checkout page
+			window.location.href = '/checkout';
+		}
+
+		function removeFromCart(cartId) {
+			// Add the logic to remove the item from the cart
+			alert('Remove item with id: ' + cartId);
+			// Optionally, update the UI after removing
+		}
+	</script>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

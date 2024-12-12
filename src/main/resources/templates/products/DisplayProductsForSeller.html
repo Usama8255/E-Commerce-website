@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+ <h3>View Products</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Price</th>
+                <th>DiscountPrice</th>
+                <th>Quantity</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.brand}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.discountPrice}"></td>
+                <td th:text="${product.quantity}"></td>
+                <td th:text="${product.category}"></td>
+                
+                <td>
+                    <a th:href="@{/revshop/seller/products/update/{id}(id=${product.id})}">Edit</a>
+                    <a th:href="@{/revshop/seller/products/delete/{id}(id=${product.id})}" 
+                       onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

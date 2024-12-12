@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .nav-link {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+        color: blue; 
+        font-weight: normal;
+    }
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2.5px;
+        display: block;
+        margin-top: 5px;
+        right: 0;
+        background: #ff0000; 
+        transition: width 0.3s ease;
+        -webkit-transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+        width: 45%;
+        left: 0;
+        right: auto;
+    }
+    .nav-link.active::after {
+        width: 100%;
+        left: 0;
+        right: auto;
+    }
+    .nav-link.active {
+        color: #561ad7;
+        font-weight: bold;
+    }
+    .nav-link {
+        color: rgb(0, 0, 0) !important;
+        font-size: 17px;
+        font-weight: bold;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+    }
+    .navbar {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        background-color: #a39595;
+    }
+
+    /* Adjust the logo size */
+    .navbar-brand img {
+        width: 160px;
+    }   
+
+    body { margin-top: 0px; }
+    .avatar {
+        width: 200px;
+        height: 200px;
+    }	
+</style>
+<body>
+   <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+		<a class="navbar-brand" th:href="@{/}"> <img src="https://i.postimg.cc/T2nXh20S/REVSHOP-main2.png"
+				alt="RevShop Logo">
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+			<ul class="navbar-nav ml-auto">
+
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/displayProducts">Shop</a></li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/orderitems">Your Orders</a></li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/favorite">Wishlist</a></li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/home">LogOut</a></li>
+				<li class="nav-item mx-5">
+					<a class="nav-link" href="/revshop/update">
+						<img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/profile-1829212-1551474.png?f=webp&w=512"
+							alt="Profile" style="width: 22px; height: 22px;">
+					</a>
+				</li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/cart"><svg
+							xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+							class="bi bi-bag" viewBox="0 0 16 16">
+							<path
+								d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+						</svg></a></li>
+			</ul>
+		</div>
+	</nav>
+    <div class="container bootstrap snippets bootdey">
+        <hr>
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-3">
+                <div class="text-center">
+                    <img src="https://i.pinimg.com/564x/02/f8/1d/02f81d016fff0df2aa45c7e3d1ea68ac.jpg" class="avatar img-circle img-thumbnail" alt="avatar">
+                    <h6>Your Profile...</h6>
+                </div>
+            </div>
+          
+            <!-- edit form column -->
+            <div class="col-md-9 personal-info">
+                <h3>Personal info</h3>
+                
+                <form class="form-horizontal" role="form" th:action="@{/revshop/update}" th:object="${buyers}" method="post">
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">First name:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" th:field="*{firstName}" th:value="${buyers.firstName}" name="firstName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Last name:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="text" th:field="*{lastName}" th:value="${buyers.lastName}" name="lastName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Phone Number:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="tel" th:field="*{phoneNumber}" th:value="${buyers.phoneNumber}" name="phoneNumber">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Email:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="email" th:value="${buyers.email}" name="email" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Password:</label>
+                        <div class="col-lg-8">
+                            <input class="form-control" type="password" th:field="*{password}" th:value="${buyers.password}" name="password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-3 col-lg-8">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+     <!-- Flash message display -->
+    <div th:if="${message}" style="display: none;" id="flashMessage">
+        <span th:text="${message}"></span>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Check if flash message exists
+            const flashMessage = $('#flashMessage');
+            if (flashMessage.length > 0) {
+                const message = flashMessage.text();
+                // Display the alert
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: message,
+                    confirmButtonText: 'Okay'
+                });
+                // Optionally hide the flash message after showing it
+                flashMessage.hide(); // or flashMessage.remove();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        h1 {
+            text-align: center;
+            margin-top: 60px;
+            color: #561ad7;
+        }
+        .confirmation-details {
+            margin-top: 40px;
+            text-align: center;
+        }
+        .confirmation-details p {
+            font-size: 18px;
+            margin: 15px 0;
+        }
+        .order-summary {
+            margin: 30px auto;
+            width: 60%;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .order-summary h5 {
+            font-weight: bold;
+        }
+        .order-summary .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .order-summary .total-price {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .navbar {
+            padding-top: 0.3rem;
+            padding-bottom: 0.3rem;
+            background-color: #a39595;
+        }
+        .navbar-brand img {
+            width: 160px;
+        }
+        .footer {
+            background-color: #a39595;
+            padding: 1rem;
+            margin-top: 5rem;
+            text-align: center;
+            color: white;
+        }
+        .nav-link {
+			position: relative;
+			display: inline-block;
+			text-decoration: none;
+			color: blue;
+			font-weight: normal;
+		}
+
+		.nav-link::after {
+			content: '';
+			position: absolute;
+			width: 0;
+			height: 2.5px;
+			display: block;
+			margin-top: 5px;
+			right: 0;
+			background: #ff0000;
+			transition: width 0.3s ease;
+			-webkit-transition: width 0.3s ease;
+		}
+
+		.nav-link:hover::after {
+			width: 45%;
+			left: 0;
+			right: auto;
+		}
+
+		.nav-link.active::after {
+			width: 100%;
+			left: 0;
+			right: auto;
+		}
+
+		.nav-link.active {
+			color: #561ad7;
+			font-weight: bold;
+		}
+
+		.nav-link {
+			color: rgb(0, 0, 0) !important;
+			font-size: 17px;
+			font-weight: bold;
+			padding-top: 0.25rem;
+			padding-bottom: 0.25rem;
+		}
+
+		.navbar {
+			padding-top: 0.5rem;
+			padding-bottom: 0.5rem;
+		}
+
+		.navbar {
+			padding-top: 0.3rem;
+			padding-bottom: 0.3rem;
+			background-color: #a39595;
+		}
+
+		/* Adjust the logo size */
+		.navbar-brand img {
+			width: 160px;
+		}
+    </style>
+</head>
+<body>
+    <!-- Header / Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <a class="navbar-brand" href="Landing main.html"><img src="https://i.postimg.cc/T2nXh20S/REVSHOP-main2.png" alt="RevShop"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-5"><a class="nav-link" href="/revshop/displayProducts">Shop</a></li>
+                <li class="nav-item mx-5"><a class="nav-link" href="/revshop/orderitems">Your Orders</a></li>
+                <li class="nav-item mx-5"><a class="nav-link" href="/revshop/favorite">Wishlist</a></li>
+                <li class="nav-item mx-5"><a class="nav-link" href="/revshop/home">LogOut</a></li>
+                <li class="nav-item mx-5">
+                    <a class="nav-link" href="/revshop/update">
+                        <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/profile-1829212-1551474.png?f=webp&w=512" alt="Profile" style="width: 22px; height: 22px;">
+                    </a>
+                </li>
+                <li class="nav-item mx-5"><a class="nav-link" href="/revshop/cart"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                            class="bi bi-bag" viewBox="0 0 16 16">
+                            <path
+                                d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+                        </svg></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Order Confirmation Content -->
+    <div class="container">
+        <h1>Order Confirmed!</h1>
+        <div class="confirmation-details">
+            <p>Thank you for your purchase! Your order has been successfully placed.</p>
+            <p>You will receive a confirmation email shortly.</p>
+             <p>Happy shopping.</p>
+        </div>
+
+
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2024 RevShop. All Rights Reserved.</p>
+        <p><b>Support:</b> revshop.ecommerce@gmail.com</p>
+        <p>Follow us on
+            <a href="https://www.facebook.com/login/" class="text-white" target="_blank">Facebook</a> |
+            <a href="https://www.instagram.com/revshop_official/" class="text-white" target="_blank">Instagram</a> |
+            <a href="https://x.com/revshop_rev" class="text-white" target="_blank">Twitter</a> |
+            <a href="https://www.linkedin.com/in/revshop" class="text-white" target="_blank">LinkedIn</a>
+        </p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RevShop - Secure, User-friendly e-commerce platform for buyers and sellers.">
+    <title>RevShop - Home</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS for additional styling */
+        .carousel-inner img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+        .category-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .feature-card img {
+            height: 150px;
+            object-fit: cover;
+        }
+        .testimonial {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .nav-link {
+            position: relative;
+            display: inline-block;
+            text-decoration: none;
+            color: blue; 
+            font-weight: normal;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2.5px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: #ff0000; 
+            transition: width 0.3s ease;
+            -webkit-transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 45%;
+            left: 0;
+            right: auto;
+        }
+        .nav-link.active::after {
+            width: 100%;
+            left: 0;
+            right: auto;
+        }
+        .nav-link.active {
+            color: #561ad7;
+            font-weight: bold;
+        }
+        .nav-link {
+            color: rgb(0, 0, 0) !important;
+            font-size: 17px;
+            font-weight: bold;
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+        .navbar {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .navbar {
+            padding-top: 0.3rem;
+            padding-bottom: 0.3rem;
+            background-color: #a39595;
+        }
+
+        /* Adjust the logo size */
+        .navbar-brand img {
+            width: 160px;
+        }   
+    </style>
+</head>
+<body>
+    <!-- Header / Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <a class="navbar-brand" href="Home.html">
+            <img src="https://i.postimg.cc/T2nXh20S/REVSHOP-main2.png" alt="RevShop Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item mx-5"><a class="nav-link" th:href="@{/revshop/home}">Home</a></li>
+                <li class="nav-item mx-5"><a class="nav-link" href="/revshop/displayProducts">Shop</a></li>
+                <li class="nav-item mx-5"><a class="nav-link" href="/revshop/about">About</a></li>
+                <li class="nav-item mx-5"><a class="nav-link" th:href="@{/revshop/register}">Sell on RevShop</a></li>
+                <li class="nav-item mx-5"><a class="nav-link" th:href="@{/revshop/login}">Login</a></li>
+                <li class="nav-item mx-5"><a class="nav-link" href="/revshop/login"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                    </svg>
+                </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Image Slider -->
+    <div id="heroCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://www.hcsupermart.com/wp-content/uploads/2024/01/3-2-HOME-APPLIANCES-2-1.jpg" class="d-block w-100" alt="Electronics">
+                <div class="carousel-caption d-none d-md-block">
+                    
+                    
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://i.postimg.cc/zGpFtF21/fash.jpg" class="d-block w-100" alt="Fashion Deals">
+                <div class="carousel-caption d-none d-md-block">
+                    
+                    
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://images.pexels.com/photos/1090638/pexels-photo-1090638.jpeg?cs=srgb&dl=pexels-fotios-photos-1090638.jpg&fm=jpg" class="d-block w-100" alt="Home and Living">
+                <div class="carousel-caption d-none d-md-block">
+                    
+                    
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <!-- Product Categories Section -->
+    <section class="container mt-5">
+        <h2 class="text-center mb-4">Shop by Category</h2>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="card category-card">
+                    <img src="https://static-assets.business.amazon.com/assets/in/24th-jan/705_Website_Blog_Appliances_1450x664.jpg.transform/1450x664/image.jpg" class="card-img-top" alt="Electronics">
+                    <div class="card-body">
+                        <h5 class="card-title">Electronics</h5>
+                        <a href="/revshop/search?category=Electronics" class="btn btn-outline-primary">Browse</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card category-card">
+                    <img src="https://www.shutterstock.com/image-photo/cheerful-couple-shopping-using-phone-600nw-2156250209.jpg" class="card-img-top" alt="Fashion">
+                    <div class="card-body">
+                        <h5 class="card-title">Fashion</h5>
+                        <a href="/revshop/search?category=Fashion" class="btn btn-outline-primary">Browse</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card category-card">
+                    <img src="https://www.safestore.co.uk/getattachment/fc73602d-e099-4d8b-b9c3-1225cb626613/attachment.aspx" class="card-img-top" alt="Home and Living">
+                    <div class="card-body">
+                        <h5 class="card-title">Home & Living</h5>
+                        <a href="/revshop/search?category=HomeAplliances" class="btn btn-outline-primary">Browse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="container mt-5">
+        <h2 class="text-center mb-4">Featured Products</h2>
+        <div class="row text-center">
+            <div class="col-md-3">
+                <div class="card feature-card">
+                    <img src="https://assets.ajio.com/medias/sys_master/root/20240716/4FLi/6696ae201d763220fac8941d/-473Wx593H-466961091-grey-MODEL.jpg" class="card-img-top" alt="Product">
+                    <div class="card-body">
+                        <h5 class="card-title">Shirts</h5>
+                        <p class="card-text">₹1599.00</p>
+                        <a href="#" class="btn btn-outline-primary">Grab Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card feature-card">
+                    <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRzYZIy-26l8xRlgcRgZYErGu9E7A6MDpNSLz_BXM3-RCiQknCUEWlDOdx_n_Mt4cV7dgOiMY3bKvnkMyA6UOgIatDZ92D-jCzlW8PTNkWcJ9P34vU2JYVSew&usqp=CAE" class="card-img-top" alt="Product">
+                    <div class="card-body">
+                        <h5 class="card-title">T-Shirts</h5>
+                        <p class="card-text">₹799.00</p>
+                        <a href="/revshop/login" class="btn btn-outline-primary">Grab Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card feature-card">
+                    <img src="https://assets.ajio.com/medias/sys_master/root/20230621/s8f6/64928ba5d55b7d0c63909f51/-473Wx593H-464114535-white-MODEL8.jpg" class="card-img-top" alt="Product">
+                    <div class="card-body">
+                        <h5 class="card-title">Shoes</h5>
+                        <p class="card-text">₹999.00</p>
+                        <a href="/revshop/login" class="btn btn-outline-primary">Grab Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card feature-card">
+                    <img src="https://www.mystore.in/s/62ea2c599d1398fa16dbae0a/6544c266cb8b836b0b0f01b2/81cdaizz6fl-640x640.jpg" class="card-img-top" alt="Product">
+                    <div class="card-body">
+                        <h5 class="card-title">Decoratives</h5>
+                        <p class="card-text">₹49.00</p>
+                        <a href="revshop/login" class="btn btn-outline-primary">Grab Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonial container mt-5">
+        <h2 class="text-center mb-4">What Our Customers Say</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0">"Amazing platform! Fast shipping and great products!"</p>
+                    <footer class="blockquote-footer">John Doe</footer>
+                </blockquote>
+            </div>
+            <div class="col-md-4">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0">"I love the easy returns and customer support."</p>
+                    <footer class="blockquote-footer">Jane Smith</footer>
+                </blockquote>
+            </div>
+            <div class="col-md-4">
+                <blockquote class="blockquote text-center">
+                    <p class="mb-0">"Top-notch deals on quality products."</p>
+                    <footer class="blockquote-footer">Alice Lee</footer>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Subscription -->
+    <section class="container mt-5">
+        <div class="row">
+            <div class="col text-center">
+                <h4>Sign in for the Latest Deals and Offers</h4>
+                <form class="form-inline justify-content-center mt-3">
+                    <input type="email" class="form-control mb-2 mr-sm-2" placeholder="Enter your email">
+                    <a href="/revshop/login" class="btn btn-outline-success mb-2">Sign In</a>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- Footer Section -->
+ <footer class="text-center text-lg-start">
+        <div class="container">
+            <div class="row">
+                <!-- Map Section -->
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <h5 class="text-uppercase">Our Location</h5>
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.042204925802!2d80.24913291533451!3d13.042456490835926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a526586b379ed7d%3A0xf2be4011af5e5ac8!2sWorkafella%20High%20Street!5e0!3m2!1sen!2sin!4v1609838727074!5m2!1sen!2sin" 
+                            width="100%" 
+                            height="300" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+                
+        <!-- Contact Us Section -->
+        <div class="col" style="padding-left: 160px; padding-top: 70px;">
+            <div class="col-12 mb-4">
+                <h5 class="text-uppercase">Contact Us</h5>
+                <p><center><b>Support:</b> revshop.ecommerce@gmail.com</center></p>
+                <p><b>Phone:</b> +91 9876543210</p>
+                <p><b>Address:</b> <br>Workafella High Street, No. 431, High street, Anna Salai, Teynampet, Chennai, Tamil Nadu 600018</p>
+            </div>
+        </div>
+            </div>
+            <!-- Social Media Icons -->
+            <hr class="my-4" />
+            <p>Follow us on
+                <a href="https://www.facebook.com/login/" style="margin: 0 10px;" target="_blank">
+                    <i class="fab fa-facebook"></i> Facebook
+                </a> |
+                <a href="https://www.instagram.com/revshop_official/" class="text-white" style="margin: 0 10px;" target="_blank">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a> |
+                <a href="https://x.com/revshop_rev" class="text-white" style="margin: 0 10px;" target="_blank">
+                    <i class="fab fa-twitter"></i> Twitter
+                </a> |
+                <a href="https://www.linkedin.com/in/revshop" class="text-white" style="margin: 0 10px;" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+            </p>  
+            <hr class="my-4" />
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 RevShop. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap JS, jQuery, Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

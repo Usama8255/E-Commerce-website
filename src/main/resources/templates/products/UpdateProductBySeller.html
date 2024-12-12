@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Product - Seller Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin-top: 30px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+        }
+        .form-group.required label:after {
+            content: " *";
+            color: red;
+        }
+        .gender-section, .size-section, .color-section {
+            display: none; /* Initially hidden */
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('category').addEventListener('change', function() {
+                var category = this.value;
+                var genderSection = document.querySelector('.gender-section');
+                var sizeSection = document.querySelector('.size-section');
+                var colorSection = document.querySelector('.color-section');
+                var subcategory = document.getElementById('subcategory');
+
+                // Reset fields
+                genderSection.style.display = 'none';
+                sizeSection.style.display = 'none';
+                colorSection.style.display = 'none';
+                subcategory.innerHTML = '<option value="" disabled selected>Select Subcategory</option>'; // Reset subcategory
+
+                // Show sections based on category
+                if (category === 'Fashion') {
+                    genderSection.style.display = 'block';
+                    sizeSection.style.display = 'block';
+                    colorSection.style.display = 'block';
+                    subcategory.innerHTML += `
+                        <option value="Men's Clothing">Men's Clothing</option>
+                        <option value="Women's Clothing">Women's Clothing</option>
+                        <option value="Kids' Clothing">Kids' Clothing</option>
+                        <option value="Footwear">Footwear</option>
+                        <option value="Accessories">Accessories</option>
+                    `;
+                } else if (category === 'Electronics') {
+                    colorSection.style.display = 'block';
+                    subcategory.innerHTML += `
+                        <option value="Smartphones">Smartphones</option>
+                        <option value="Laptops">Laptops</option>
+                        <option value="Cameras">Cameras</option>
+                        <option value="Headphones">Headphones</option>
+                        <option value="Wearables">Wearables</option>
+                    `;
+                } else if (category === 'Home & Kitchen') {
+                    colorSection.style.display = 'block';
+                    subcategory.innerHTML += `
+                        <option value="Cookware">Cookware</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Home Decor">Home Decor</option>
+                        <option value="Appliances">Appliances</option>
+                    `;
+                } else if (category === 'Books') {
+                    subcategory.innerHTML += `
+                        <option value="Fiction">Fiction</option>
+                        <option value="Non-Fiction">Non-Fiction</option>
+                        <option value="Children's Books">Children's Books</option>
+                        <option value="Textbooks">Textbooks</option>
+                    `;
+                } else if (category === 'Sports') {
+                    subcategory.innerHTML += `
+                        <option value="Indoor Sports">Indoor Sports</option>
+                        <option value="Outdoor Sports">Outdoor Sports</option>
+                        <option value="Sports Apparel">Sports Apparel</option>
+                        <option value="Fitness Equipment">Fitness Equipment</option>
+                    `;
+                } else if (category === 'Toys & Games') {
+                    subcategory.innerHTML += `
+                        <option value="Educational Toys">Educational Toys</option>
+                        <option value="Outdoor Toys">Outdoor Toys</option>
+                        <option value="Board Games">Board Games</option>
+                    `;
+                } else if (category === 'Health & Personal Care') {
+                    subcategory.innerHTML += `
+                        <option value="Vitamins & Supplements">Vitamins & Supplements</option>
+                        <option value="Personal Care">Personal Care</option>
+                        <option value="Medical Supplies">Medical Supplies</option>
+                    `;
+                }
+            });
+
+            // Set initial values
+            document.getElementById('category').value = /*[[${product.category}]]*/ ''; 
+            document.getElementById('subcategory').value = /*[[${product.subCategory}]]*/ ''; 
+        });
+
+        function validateForm() {
+            // Add custom validation if needed
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+<!-- Update Product Form -->
+<div class="container">
+    <h2>Update Product</h2>
+    <form th:action="@{/revshop/product/update}" th:object="${product}" method="post">
+    <input type="hidden" th:name="productId" th:value="${product.id}">
+
+        <!-- Product Details -->
+        <div class="form-row">
+            <div class="form-group col-md-6 required">
+                <label for="name">Product Name</label>
+                <input type="text" id="name" th:field="*{name}" th:value="${product.name}" class="form-control" placeholder="Enter product name" required>
+            </div>
+            <div class="form-group col-md-6 required">
+                <label for="brand">Brand</label>
+                <input type="text" id="brand" th:field="*{brand}" th:value="${product.brand}" class="form-control" placeholder="Enter brand name" required>
+            </div>
+        </div>
+
+        <div class="form-group required">
+            <label for="description">Product Description</label>
+            <textarea id="description" th:field="*{description}" th:value="${product.description}" class="form-control" rows="4" placeholder="Enter product description" required></textarea>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6 required">
+                <label for="category">Category</label>
+                <select id="category" th:field="*{category}" th:value="${product.category}" class="form-control" required>
+                    <option value="" disabled>Select Category</option>
+                    <option value="Electronics" th:selected="${product.category == 'Electronics'}">Electronics</option>
+                    <option value="Fashion" th:selected="${product.category == 'Fashion'}">Fashion</option>
+                    <option value="Home & Kitchen" th:selected="${product.category == 'Home & Kitchen'}">Home & Kitchen</option>
+                    <option value="Books" th:selected="${product.category == 'Books'}">Books</option>
+                    <option value="Sports" th:selected="${product.category == 'Sports'}">Sports</option>
+                    <option value="Toys & Games" th:selected="${product.category == 'Toys & Games'}">Toys & Games</option>
+                    <option value="Health & Personal Care" th:selected="${product.category == 'Health & Personal Care'}">Health & Personal Care</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6 required">
+                <label for="subcategory">Subcategory</label>
+                <select id="subcategory" th:field="*{subCategory}" th:value="${product.subCategory}" class="form-control" required>
+                    <option value="" disabled>Select Subcategory</option>
+                    <!-- Add subcategories dynamically here based on selected category -->
+                </select>
+            </div>
+        </div>
+
+        <!-- Gender Selection -->
+        <div class="form-group gender-section">
+            <label>Gender</label><br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="male" th:field="*{gender}" th:value="${product.gender}" value="Male" th:checked="${product.gender == 'Male'}">
+                <label class="form-check-label" for="male">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="female" th:field="*{gender}" th:value="${product.gender}" value="Female" th:checked="${product.gender == 'Female'}">
+                <label class="form-check-label" for="female">Female</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="gender" id="unisex" th:field="*{gender}" th:value="${product.gender}" value="Unisex" th:checked="${product.gender == 'Unisex'}">
+                <label class="form-check-label" for="unisex">Unisex</label>
+            </div>
+        </div>
+
+        <!-- Size Selection -->
+        <div class="form-group size-section">
+            <label for="size">Size</label>
+            <select id="size" th:field="*{size}" th:value="${product.size}" class="form-control">
+                <option value="" disabled>Select Size</option>
+                <option value="XS" th:selected="${product.size == 'XS'}">XS</option>
+                <option value="S" th:selected="${product.size == 'S'}">S</option>
+                <option value="M" th:selected="${product.size == 'M'}">M</option>
+                <option value="L" th:selected="${product.size == 'L'}">L</option>
+                <option value="XL" th:selected="${product.size == 'XL'}">XL</option>
+            </select>
+        </div>
+
+        <!-- Color Selection -->
+        <div class="form-group color-section">
+            <label for="color">Color</label>
+            <input type="text" id="color" th:field="*{color}" th:value="${product.color}" class="form-control" placeholder="Enter color" required>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6 required">
+                <label for="price">Price</label>
+                <input type="number" id="price" th:field="*{price}" th:value="${product.price}" class="form-control" placeholder="Enter price" required step="0.01">
+            </div>
+            <div class="form-group col-md-6 required">
+                <label for="discountPrice">Discount Price</label>
+                <input type="number" id="discountPrice" th:field="*{discountPrice}" th:value="${product.discountPrice}" class="form-control" placeholder="Enter discount price" step="0.01">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6 required">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" th:field="*{quantity}" th:value="${product.quantity}" class="form-control" placeholder="Enter quantity" required>
+            </div>
+            <div class="form-group col-md-6 required">
+                <label for="threshold">Threshold</label>
+                <input type="number" id="threshold" th:field="*{threshold}" th:value="${product.threshold}" class="form-control" placeholder="Enter threshold" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="image_url">Image URL</label>
+            <input type="text" id="image_url" th:field="*{image_url}" class="form-control" placeholder="Enter image URL">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Update Product</button>
+            <a href="@{/revshop/show}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

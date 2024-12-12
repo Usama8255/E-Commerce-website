@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="RevShop - Browse Products">
+	<title>RevShop - Products</title>
+	<!-- Bootstrap CSS -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+	<style>
+		/* Custom CSS */
+		.product-card img {
+			height: 250px;
+			object-fit: cover;
+		}
+
+		.product-card {
+			margin-bottom: 30px;
+		}
+
+		.filter-section {
+			background-color: #f8f9fa;
+			padding: 20px;
+			border-radius: 5px;
+			margin-bottom: 20px;
+		}
+
+		.product-price {
+			color: #561ad7;
+			font-size: 18px;
+			font-weight: bold;
+		}
+
+		.product-discount {
+			color: #ff0000;
+			font-weight: bold;
+			font-size: 24px;
+			/* Increase font size for the discount price */
+		}
+
+		.original-price {
+			text-decoration: line-through;
+			color: #000000;
+			/* Color for the struck-out price */
+		}
+
+		.filter-title {
+			font-size: 20px;
+			margin-bottom: 10px;
+		}
+
+		.search-bar input[type="search"] {
+			background-color: #f0f0f0;
+			color: #000000;
+			border: 2px solid #561ad7;
+			border-radius: 20px 40px 10px 15px;
+			padding: 10px;
+			outline: none;
+			transition: background-color 0.3s ease, border-color 0.3s ease;
+			width: 250px;
+		}
+
+		.search-bar input[type="search"]::placeholder {
+			color: #000000;
+		}
+
+		.search-bar input[type="search"]:focus {
+			background-color: #fff;
+			border-color: #561ad7;
+		}
+
+		.input-group-append .input-group-text {
+			background-color: #561ad7;
+			border-radius: 0 40px 40px 0;
+			cursor: pointer;
+			transition: background-color 0.3s ease, transform 0.3s ease;
+			color: #fff;
+		}
+
+		.input-group-append .input-group-text:hover {
+			background-color: #7944d9;
+			transform: scale(1.1);
+		}
+
+		.nav-link {
+			position: relative;
+			display: inline-block;
+			text-decoration: none;
+			color: blue;
+			font-weight: normal;
+		}
+
+		.nav-link::after {
+			content: '';
+			position: absolute;
+			width: 0;
+			height: 2.5px;
+			display: block;
+			margin-top: 5px;
+			right: 0;
+			background: #ff0000;
+			transition: width 0.3s ease;
+			-webkit-transition: width 0.3s ease;
+		}
+
+		.nav-link:hover::after {
+			width: 45%;
+			left: 0;
+			right: auto;
+		}
+
+		.nav-link.active::after {
+			width: 100%;
+			left: 0;
+			right: auto;
+		}
+
+		.nav-link.active {
+			color: #561ad7;
+			font-weight: bold;
+		}
+
+		.nav-link {
+			color: rgb(0, 0, 0) !important;
+			font-size: 17px;
+			font-weight: bold;
+			padding-top: 0.25rem;
+			padding-bottom: 0.25rem;
+		}
+
+		.navbar {
+			padding-top: 0.5rem;
+			padding-bottom: 0.5rem;
+		}
+
+		.navbar {
+			padding-top: 0.3rem;
+			padding-bottom: 0.3rem;
+			background-color: #b7e0d6;
+		}
+
+		.navbar-brand img {
+			width: 160px;
+		}
+
+		.product-card .btn {
+			margin-right: 6px;
+		}
+
+		@media (max-width: 768px) {
+			.navbar-collapse {
+				text-align: center;
+			}
+
+			.navbar-nav {
+				margin-top: 10px;
+			}
+
+			.form-inline {
+				display: block;
+				width: 100%;
+				margin-top: 10px;
+			}
+
+			.form-inline .input-group {
+				width: 100%;
+			}
+
+			.search-bar input[type="search"] {
+				width: 100%;
+				margin-bottom: 10px;
+			}
+		}
+
+		.favorite-btn {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			background: transparent;
+			border: none;
+			cursor: pointer;
+			font-size: 24px;
+			color: #ff0000b6;
+			transition: transform 0.3s ease;
+		}
+
+		/* Hover effect for favorite button */
+		.heart:hover {
+			color: #ff0000;
+			transform: scale(1.2);
+			/* Scale effect on hover */
+		}
+
+		.heart {
+			color: #ff00008a;
+			/* Semi-transparent white */
+			transition: color 0.3s ease;
+			/* Smooth transition for color change */
+
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Header / Navbar -->
+	<nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #a39595;">
+		<a class="navbar-brand" href="Landing main.html"><img src="https://i.postimg.cc/T2nXh20S/REVSHOP-main2.png"
+				alt="RevShop"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+			<ul class="navbar-nav ml-auto">
+				
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/displayProducts">Shop</a></li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/orderitems">Your Orders</a></li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/favorite">Wishlist</a></li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/home">LogOut</a></li>
+				<li class="nav-item mx-5">
+    <a class="nav-link" href="/revshop/update">
+        <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/profile-1829212-1551474.png?f=webp&w=512" alt="Profile" style="width: 22px; height: 22px;">
+    </a>
+</li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/cart"><svg
+							xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+							class="bi bi-bag" viewBox="0 0 16 16">
+							<path
+								d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+						</svg></a></li>
+			</ul>
+
+		</div>
+	</nav>
+
+	<!-- Filters Section -->
+	<section class="container mt-5">
+		<div class="row">
+			<div class="col-md-3">
+				<div class="filter-section">
+					<h5 class="filter-title">Filter by Category</h5>
+					<ul class="list-group">
+						<li class="list-group-item"><a href="/revshop/search?category=Electronics">Electronics</a></li>
+						<li class="list-group-item"><a href="/revshop/search?category=Fashion">Fashion</a></li>
+						<li class="list-group-item"><a href="/revshop/search?category=HomeAplliances">Home & Living</a>
+						</li>
+						<li class="list-group-item"><a href="/revshop/search?category=Sports">Sports</a></li>
+						<li class="list-group-item"><a href="/revshop/search?category=Clothing">Clothing</a></li>
+						<li class="list-group-item"><a href="/revshop/search?category=Books">Books</a></li>
+						<li class="list-group-item"><a href="/revshop/displayProducts">All Products</a></li>
+					</ul>
+
+				</div>
+				<div class="filter-section">
+					<h5 class="filter-title">Filter by Price</h5>
+					<form class="form-inline" action="/revshop/filterByDiscountPrice" method="GET"
+						style="margin: 20px;">
+						<div class="form-row align-items-center">
+							<div class="col-auto">
+								<label for="mindiscountPrice" class="col-form-label">Min
+									Price:</label> <input type="number" class="form-control" id="mindiscountPrice"
+									name="mindiscountPrice" placeholder="Min Price" required>
+							</div>
+							<div class="col-auto">
+								<label for="maxdiscountPrice" class="col-form-label">Max
+									Price:</label> <input type="number" class="form-control" id="maxdiscountPrice"
+									name="maxdiscountPrice" placeholder="Max Price" required>
+							</div>
+							<div class="col-auto">
+								<button type="submit" class="btn btn-primary">Filter</button>
+							</div>
+						</div>
+					</form>
+
+
+				</div>
+			</div>
+
+
+			<div class="col-md-9">
+				<!-- Search Bar -->
+				<form class="form-inline my-2 my-lg-0 ml-3" action="/revshop/searchByNameOrBrand" method="GET">
+					<div class="input-group" style="max-width: 400px; margin-left: 550px;">
+						<input class="form-control" type="search" name="query" placeholder="Search for products"
+							aria-label="Search">
+						<div class="input-group-append">
+							<button type="submit" class="input-group-text" id="basic-addon2">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+
+				<h2 class="text-center mb-4">All Products</h2>
+				<div class="row">
+					<!-- Product Card -->
+					<div class="col-md-4" th:each="product : ${products}">
+						<div class="card product-card">
+							<img th:src="@{${product.image_url}}" class="card-img-top" th:alt="${product.name}">
+							<input type="hidden" name="productId" th:value="${product.id}" />
+							<form th:action="@{/revshop/favorites/add}" th:method="post">
+								<input type="hidden" th:name="productId" th:value="${product.id}">
+								<button class="favorite-btn" onclick="toggleFavorite(this)"
+									style="position: absolute; top: 10px; right: 10px; background: transparent; border: none; cursor: pointer; font-size: 24px; color: #ff0000;">
+									<span class="heart">&#10084;&#65039;</span>
+								</button>
+							</form>
+							<div class="card-body">
+								<h5 class="card-title">
+									<center><b th:text="${product.brand}"></b><br th:text="${product.name}"></center>
+								</h5>
+								<p class="product-price">
+									<span class="original-price" th:text="'₹' + ${product.price}"></span>
+									<span class="product-discount" th:text="'₹' + ${product.discountPrice}"></span>
+									<span class="badge badge-danger ml-2">33% OFF</span>
+								</p>
+
+								<p class="card-text" th:text="${product.description}"></p>
+								<form th:action="@{/revshop/cart/add}" method="post" style="display: inline;">
+									<input type="hidden" name="productId" th:value="${product.id}" />
+									<input type="hidden" id="quantity" name="quantity" value="1" min="1" required
+										style="width: 60px;">
+									<button type="submit" class="btn btn-outline-secondary">Add
+										to Cart</button>
+								</form>
+								<form th:action="@{/revshop/orderform}" th:method="get">
+									<input type="hidden" name="productId" th:value="${product.id}" />
+									<input type="hidden" name="price" th:value="${product.discountPrice}" />
+									<input type="hidden" name="productImage" th:value="${product.image_url}" />
+									<input type="hidden" name="productName" th:value="${product.name}" />
+									<button type="submit" class="btn btn-primary">Buy Now</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+	<!-- Footer Section -->
+	<footer class="text-center text-white" style="background-color: #a39595; padding: 1rem; margin-top: 5rem;">
+		<p>&copy; 2024 RevShop. All Rights Reserved.</p>
+		<p>
+			<center><b>Support:</b> revshop.ecommerce@gmail.com</center>
+		</p>
+		<p>Follow us on
+			<a href="https://www.facebook.com/login/" class="text-white" style="margin: 0 10px;" target="_blank">
+				<i class="fab fa-facebook"></i> Facebook
+			</a> |
+			<a href="https://www.instagram.com/revshop_official/" class="text-white" style="margin: 0 10px;"
+				target="_blank">
+				<i class="fab fa-instagram"></i> Instagram
+			</a> |
+			<a href="https://x.com/revshop_rev" class="text-white" style="margin: 0 10px;" target="_blank">
+				<i class="fab fa-twitter"></i> Twitter
+			</a> |
+			<a href="https://www.linkedin.com/in/revshop" class="text-white" style="margin: 0 10px;" target="_blank">
+				<i class="fab fa-linkedin"></i> LinkedIn
+			</a>
+		</p>
+	</footer>
+	<!-- Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script>
+		function toggleFavorite(btn) {
+			let heart = btn.querySelector('.heart');
+			if (heart.style.color === 'red') {
+				heart.style.color = '#ff000072';
+			} else {
+				heart.style.color = 'red';
+			}
+		}
+	</script>
+</body>
+
+</html>

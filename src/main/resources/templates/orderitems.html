@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Order Items</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		/* Set a fixed size for the product card */
+		.product-card {
+			width: 300px;
+			/* Fixed width for all cards */
+			height: auto;
+			/* Auto height to accommodate content */
+			margin-bottom: 10px;
+			position: relative;
+			/* To position button at the bottom */
+		}
+
+		/* Set a fixed size for the images */
+		.product-card img {
+			width: 100%;
+			/* Ensure the image takes full width of the card */
+			height: 200px;
+			/* Fixed height for the images */
+			object-fit: cover;
+			/* Maintain aspect ratio and crop if necessary */
+		}
+
+		/* Ensure the card-body content has a fixed size */
+		.product-card .card-body {
+			padding: 15px;
+			/* Consistent padding */
+		}
+
+		/* Additional styling for layout */
+		.filter-section {
+			background-color: #f8f9fa;
+			padding: 20px;
+			border-radius: 5px;
+			margin-bottom: 20px;
+		}
+
+		.product-price {
+			color: #561ad7;
+			font-size: 18px;
+			font-weight: bold;
+		}
+
+		.product-discount {
+			color: #ff0000;
+			font-weight: bold;
+			font-size: 24px;
+		}
+
+		.original-price {
+			text-decoration: line-through;
+			color: #000000;
+		}
+
+		.search-bar input[type="search"] {
+			background-color: #f0f0f0;
+			color: #000000;
+			border: 2px solid #561ad7;
+			border-radius: 20px 40px 10px 15px;
+			padding: 10px;
+			width: 250px;
+			outline: none;
+		}
+
+		.search-bar input[type="search"]:focus {
+			background-color: #fff;
+			border-color: #561ad7;
+		}
+
+		.nav-link {
+			position: relative;
+			display: inline-block;
+			text-decoration: none;
+			color: blue;
+			font-weight: normal;
+		}
+
+		.nav-link::after {
+			content: '';
+			position: absolute;
+			width: 0;
+			height: 2.5px;
+			display: block;
+			margin-top: 5px;
+			right: 0;
+			background: #ff0000;
+			transition: width 0.3s ease;
+			-webkit-transition: width 0.3s ease;
+		}
+
+		.nav-link:hover::after {
+			width: 45%;
+			left: 0;
+			right: auto;
+		}
+
+		.nav-link.active::after {
+			width: 100%;
+			left: 0;
+			right: auto;
+		}
+
+		.nav-link.active {
+			color: #561ad7;
+			font-weight: bold;
+		}
+
+		.nav-link {
+			color: rgb(0, 0, 0) !important;
+			font-size: 17px;
+			font-weight: bold;
+			padding-top: 0.25rem;
+			padding-bottom: 0.25rem;
+		}
+
+		.navbar {
+			padding-top: 0.5rem;
+			padding-bottom: 0.5rem;
+			background-color: #b7e0d6;
+		}
+
+		.navbar-brand img {
+			width: 160px;
+		}
+
+		.custom-btn {
+			padding: 5px 10px;
+			/* Adjust padding as needed */
+			font-size: 14px;
+			/* Adjust font size as needed */
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #a39595;">
+		<a class="navbar-brand" href="Landing main.html">
+			<img src="https://i.postimg.cc/T2nXh20S/REVSHOP-main2.png" alt="RevShop">
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+			aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+			<ul class="navbar-nav ml-auto">
+
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/displayProducts">Shop</a></li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/orderitems">Your Orders</a></li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/favorite">Wishlist</a></li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/home">LogOut</a></li>
+				<li class="nav-item mx-5">
+					<a class="nav-link" href="/revshop/update">
+						<img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/profile-1829212-1551474.png?f=webp&w=512"
+							alt="Profile" style="width: 22px; height: 22px;">
+					</a>
+				</li>
+				<li class="nav-item mx-5"><a class="nav-link" href="/revshop/cart"><svg
+							xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+							class="bi bi-bag" viewBox="0 0 16 16">
+							<path
+								d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+						</svg></a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container mt-5">
+		<h2 class="text-center">Your Order Items</h2>
+
+		<div th:if="${#lists.isEmpty(orderItems)}">
+			<p class="text-center">You have not placed any orders yet.</p>
+		</div>
+
+		<div th:if="${!#lists.isEmpty(orderItems)}" class="row">
+			<div th:each="orderItem : ${orderItems}" class="col-md-4 mb-4">
+				<div class="card product-card">
+					<img th:src="@{${orderItem.product.image_url}}" class="card-img-top" alt="Product Image">
+					<div class="card-body">
+						<h5 class="card-title" th:text="${orderItem.product.name}"></h5>
+						<p class="card-text"><strong>Description:</strong> <span
+								th:text="${orderItem.product.description}"></span></p>
+						<p class="card-text"><strong>Total Price:</strong> <span
+								th:text="${orderItem.totalPrice}"></span></p>
+
+						<!-- Review Button to Open Modal -->
+						<button type="button" class="btn btn-primary custom-btn" data-toggle="modal"
+							data-target="#reviewModal" th:data-productid="${orderItem.product.id}">
+							Add Review
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Review Modal -->
+	<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="reviewModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="reviewModalLabel">Add Your Review</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form th:action="@{/revshop/addreview}" method="post" id="reviewForm">
+						<input type="hidden" name="productId" id="modalProductId" />
+						<div class="form-group">
+							<label for="comment">Your Review:</label>
+							<textarea class="form-control" id="comment" name="comment" required></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary">Submit Review</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script>
+		// jQuery to handle the modal behavior
+		$(document).ready(function () {
+			// Set the product ID in the modal when the "Add Review" button is clicked
+			$('#reviewModal').on('show.bs.modal', function (event) {
+				var button = $(event.relatedTarget); // Button that triggered the modal
+				var productId = button.data('productid'); // Extract info from data-* attributes
+				var modal = $(this);
+				modal.find('#modalProductId').val(productId); // Set the product ID in the hidden input
+			});
+
+			// Optional: Handle form submission to redirect after adding a review
+			$('#reviewForm').on('submit', function () {
+				// Perform the AJAX request to submit the form data
+				$.ajax({
+					type: $(this).attr('method'),
+					url: $(this).attr('action'),
+					data: $(this).serialize(),
+					success: function (response) {
+						// On success, redirect to the displayProducts page
+						window.location.href = '/revshop/displayProducts';
+					},
+					error: function (error) {
+						alert('An error occurred while submitting your review. Please try again.');
+					}
+				});
+
+				// Prevent the default form submission
+				return false;
+			});
+		});
+	</script>
+</body>
+</html>

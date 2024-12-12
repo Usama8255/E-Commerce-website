@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Review</title>
+</head>
+<body>
+<h2>Add a Review</h2>
+<form th:action="@{/revshop/addreview}" method="post">
+    <input type="hidden" name="productId" th:value="${productId}"/>    
+    <label for="reviewText">Your Review:</label>
+    <textarea name="reviewText" id="reviewText" rows="4" cols="50"></textarea><br><br>
+     
+    <input type="submit" value="Submit Review"/>
+</form>
+</body>
+</html>

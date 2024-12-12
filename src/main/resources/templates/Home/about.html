@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Consistent font */
+            background-color: #eef2f3; /* Light background color */
+            margin: 0; /* No margin */
+            padding: 0; /* No padding */
+        }
+		.nav-link {
+            position: relative;
+            display: inline-block;
+            text-decoration: none;
+            color: blue; 
+            font-weight: normal;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2.5px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: #ff0000; 
+            transition: width 0.3s ease;
+            -webkit-transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 45%;
+            left: 0;
+            right: auto;
+        }
+        .nav-link.active::after {
+            width: 100%;
+            left: 0;
+            right: auto;
+        }
+        .nav-link.active {
+            color: #561ad7;
+            font-weight: bold;
+        }
+        .nav-link {
+            color: rgb(0, 0, 0) !important;
+            font-size: 17px;
+            font-weight: bold;
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+        .navbar {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .navbar {
+            padding-top: 0.3rem;
+            padding-bottom: 0.3rem;
+            background-color: #a39595;
+        }
+
+        /* Adjust the logo size */
+        .navbar-brand img {
+            width: 160px;
+        }   
+
+        .full-width {
+            width: 100%; /* Full width */
+            background-color: #ffffff; /* White background for content */
+            padding: 30px; /* Padding for spacing */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+            margin-top: 0 !important;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1e6ebd; /* Dark color for headings */
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            color: #2980b9; /* Color for subheadings */
+            margin-top: 20px; /* Margin above subheadings */
+        }
+
+        p {
+            line-height: 1.7; /* Spacing for readability */
+            color: #34495e; /* Softer dark color for text */
+            margin: 0; /* No margin for paragraphs */
+            padding: 10px 0; /* Padding for paragraph spacing */
+        }
+
+        .mission, .vision, .values {
+            margin-bottom: 30px; /* Margin below sections */
+            border-left: 4px solid #2980b9; /* Left border for emphasis */
+            padding-left: 15px; /* Padding for text inside sections */
+            background-color: #f9f9f9; /* Light background for sections */
+        }
+
+        .text-center {
+            margin-top: 20px; /* Margin for centered text */
+        }
+
+        .btn-primary {
+            background-color: #2980b9; /* Primary button color */
+            border: none; /* No border for buttons */
+        }
+
+        .btn-primary:hover {
+            background-color: #1a5e8c; /* Darker shade on hover */
+        }
+    </style>
+<body>
+	<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #a39595;">
+        <a class="navbar-brand" href="Landing main.html"><img src="https://i.postimg.cc/T2nXh20S/REVSHOP-main2.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-5"><a class="nav-link" href="Home.html">Home</a></li>
+                <li class="nav-item mx-5"><a class="nav-link" href="/revshop/displayProducts">Shop</a></li>
+                <li class="nav-item mx-5"><a class="nav-link" href="/revshop/about">About</a></li>
+                <li class="nav-item mx-5"><a class="nav-link" href="/revshop/register">Sell on RevShop</a></li>
+                <li class="nav-item mx-5"><a class="nav-link" href="/revshop/login">Login</a></li>
+                <li class="nav-item mx-5"><a class="nav-link" href="/revshop/login" ><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                  </svg></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="full-width mt-5">
+        <h2>About Us</h2>
+        <p>
+            Welcome to RevShop, your premier destination for a seamless e-commerce experience that connects buyers and sellers in an innovative and user-friendly environment. Our platform is designed to cater to the diverse needs of the modern shopper, providing a wide range of products while empowering sellers to reach their target audience effectively.
+        </p>
+
+        <div class="mission">
+            <h4>Our Mission</h4>
+            <p>
+                At RevShop, our mission is to redefine online shopping by offering a comprehensive platform where convenience meets quality. We aim to provide a marketplace that prioritizes customer satisfaction through exceptional service, a diverse product range, and an intuitive shopping experience that simplifies the way you buy and sell.
+            </p>
+        </div>
+
+        <div class="vision">
+            <h4>Our Vision</h4>
+            <p>
+                Our vision is to be the leading e-commerce platform that not only meets but exceeds customer expectations by continuously enhancing our services, embracing technological advancements, and adapting to the ever-changing retail landscape. We aspire to create a thriving community of engaged buyers and sellers who share a passion for quality and innovation.
+            </p>
+        </div>
+
+        <div class="values">
+            <h4>Our Values</h4>
+            <p>
+                At the core of RevShop are our values, which guide our operations and interactions with customers and partners alike. We believe in integrity, transparency, and respect, fostering a culture of trust and collaboration. Our commitment to sustainability and ethical practices ensures that we contribute positively to our community and the environment.
+            </p>
+        </div>
+
+        <p>
+            Thank you for choosing RevShop as your e-commerce partner. Whether you are a buyer seeking quality products or a seller looking to expand your reach, we are dedicated to supporting your journey every step of the way. Join us in revolutionizing the online shopping experience!
+        </p>
+        
+        
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer Section -->
+    <footer class="text-center text-white" style="background-color: #a39595; padding: 1rem; margin-top: 0rem;">
+	<p class="text-white">&copy; 2024 RevShop. All Rights Reserved.</p>error in this line
+    <p><center><b>Support:</b> revshop.ecommerce@gmail.com</center></p>
+    <p class="text-white">Follow us on
+        <a href="https://www.facebook.com/login/" class="text-white" style="margin: 0 10px;" target="_blank">
+            <i class="fab fa-facebook"></i> Facebook
+        </a> |
+        <a href="https://www.instagram.com/revshop_official/" class="text-white" style="margin: 0 10px;" target="_blank">
+            <i class="fab fa-instagram"></i> Instagram
+        </a> |
+        <a href="https://x.com/revshop_rev" class="text-white" style="margin: 0 10px;" target="_blank">
+            <i class="fab fa-twitter"></i> Twitter
+        </a> |
+        <a href="https://www.linkedin.com/in/revshop" class="text-white" style="margin: 0 10px;" target="_blank">
+            <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+    </p>    
+</footer>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

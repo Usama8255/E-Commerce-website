@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* General styles */
+        body {
+            background-color: #a39595;
+            color: #000;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #343a40;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .order-details {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .order-details h4 {
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            border-bottom: 1px solid #ced4da;
+            padding: 10px 0;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                margin: 30px auto;
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Order Confirmation</h2>
+        <div class="order-details">
+            <h4>Order Summary</h4>
+            <ul>
+                <li th:each="item, stat : ${cartItems}">
+                    <span th:text="${item.productName}">Item Name</span> - 
+                    <span th:text="${item.quantity}">Quantity</span> - 
+                    <span th:text="${item.price}">Price</span>
+                    <input type="hidden" name="cartItems[__${stat.index}__].productId" th:value="${item.productId}" />
+                    <input type="hidden" name="cartItems[__${stat.index}__].quantity" th:value="${item.quantity}" />
+                </li>
+            </ul>
+            <h4>Total: <span th:text="${totalPrice}">Total Price</span></h4>
+        </div>
+
+        <form action="/revshop/addorder" method="post" th:object="${order}">
+            <div class="form-group">
+                <label for="shippingAddress">Shipping Address:</label>
+                <input type="text" class="form-control" id="shippingAddress" name="shippingAddress" th:field="*{shippingAddress}" required>
+            </div>
+            <div class="form-group">
+                <label for="paymentMethod">Payment Method:</label>
+                <select class="form-control" id="paymentMethod" name="paymentMethod" th:field="*{paymentMethod}" required>
+                    <option value="Credit Card">Credit Card</option>
+                    <option value="Debit Card">Debit Card</option>
+                    <option value="UPI">UPI</option>
+                    <option value="Net Banking">Net Banking</option>
+                </select>
+            </div>
+            <input type="hidden" th:field="*{totalPrice}" th:value="${totalPrice}" />
+            <button type="submit" class="btn btn-primary">Confirm Order</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

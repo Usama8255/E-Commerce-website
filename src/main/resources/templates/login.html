@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>REVSHOP | Login </title>
+    <style>
+        /* POPPINS FONT */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        /* Background Image Fullscreen */
+        .background-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            border: none;
+           background: url('https://lightcastlepartners.com/wp-content/uploads/2023/05/e-commerce-worth-celebrating.webp') no-repeat center center;
+            background-size: cover;
+        }
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(39, 39, 39, 0.7);
+            width: 400px;
+            padding: 40px;
+            border-radius: 10px;
+            z-index: 1;
+        }
+        .form-box {
+            width: 100%;
+        }
+        header {
+            color: #fff;
+            font-size: 30px;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        .input-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .input-field {
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            height: 50px;
+            width: 100%;
+            padding-left: 45px;
+            border: none;
+            border-radius: 30px;
+            outline: none;
+            transition: .2s ease;
+        }
+        .input-field:hover, .input-field:focus {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        ::-webkit-input-placeholder {
+            color: #fff;
+        }
+        .input-box i {
+            position: absolute;
+            top: 12px;
+            left: 17px;
+            color: #fff;
+        }
+        .submit {
+            font-size: 15px;
+            font-weight: 500;
+            color: black;
+            height: 45px;
+            width: 100%;
+            border: none;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: .3s ease-in-out;
+        }
+        .submit:hover {
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
+        }
+        .top span {
+            color: #fff;
+            font-size: small;
+            display: block;
+            text-align: center;
+        }
+        .top span a {
+            font-weight: 500;
+            color: #fff;
+            margin-left: 5px;
+            text-decoration: underline;
+        }
+        .two-col {
+            display: flex;
+            justify-content: space-between;
+            color: #fff;
+            font-size: small;
+        }
+        .two label a {
+            text-decoration: none;
+            color: #fff;
+        }
+        .two label a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Image Fills Entire Page -->
+    <div class="background-iframe"></div>
+
+    <!-- Form Content Overlay -->
+    <div class="wrapper">
+        <div class="form-box">
+            <header>Login</header>
+            <div class="top">
+                <span>Don't have an account? <a th:href="@{/revshop/register}">Seller</a> <a th:href="@{/revshop/buyerRegister}">Buyer</a>
+                </span>
+            </div>
+            <form th:action="@{/revshop/login}" method="post">
+                <div class="input-box">
+                    <input type="email" name="email" class="input-field" placeholder="Username or Email" required>
+                    <i class="bx bx-user"></i>
+                </div>
+                <div class="input-box">
+                    <input type="password" name="password" class="input-field" placeholder="Password" required>
+                    <i class="bx bx-lock-alt"></i>
+                </div>
+                <div class="input-box">
+                    <input type="submit" class="submit" value="Sign In">
+                </div>
+                <div class="two-col">
+                    <div class="one">
+                        <input type="checkbox" id="login-check" name="rememberMe">
+                        <label for="login-check">Remember Me</label>
+                    </div>
+                    <div class="two">
+                        <label><a th:href="@{/revshop/forgotpassword}">Forgot password?</a></label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
